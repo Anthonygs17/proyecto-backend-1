@@ -1,0 +1,24 @@
+<h1>Bienvenido a mi aplicacion</h1>
+<h2>Contamos con los siguientes productos</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Titulo</th>
+            <th>Descripcion</th>
+            <th>Codigo</th>
+            <th>Precio</th>
+            <th>Stock</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each products}}
+        <tr>
+            <td>{{this.title}}</td>
+            <td>{{this.description}}</td>
+            <td>{{this.code}}</td>
+            <td>{{this.price}}</td>
+            <td>{{this.stock}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

@@ -1,0 +1,35 @@
+<h1>Productos</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Titulo</th>
+            <th>Descripcion</th>
+            <th>Codigo</th>
+            <th>Precio</th>
+            <th>Stock</th>
+        </tr>
+    </thead>
+    <tbody id="productos">
+    </tbody>
+</table>
+<div id="nuevoProducto">
+    <h2>Nuevo Producto</h2>
+    <form id="newProductForm">
+        <input type="text" id="title" placeholder="Titulo">
+        <input type="text" id="description" placeholder="Descripcion">
+        <input type="text" id="code" placeholder="Codigo">
+        <input type="text" id="price" placeholder="Precio">
+        <input type="text" id="stock" placeholder="Stock">
+        <button type="submit">Guardar</button>
+    </form>
+</div>
+<div id="eliminarProducto">
+    <h2>Eliminar Producto</h2>
+    <form id="deleteProductForm">
+        <input type="text" id="id" placeholder="ID">
+        <button type="submit">Eliminar</button>
+    </form>
+</div>
+
+<script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+<script src="js/realtimeProducts.js"></script>

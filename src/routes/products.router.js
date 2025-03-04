@@ -52,3 +52,4 @@ router.delete('/:pid', (req, res) => {
 });
 
 export default router;
+export { productManager };

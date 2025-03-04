@@ -20,12 +20,7 @@ router.get('/:cid', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const { products } = req.body;
-    if(!products){
-        res.status(400).json({ msg: 'Faltan datos. Se debe pasar products' });
-        return;
-    }
-    const cart = { products };
+    const cart = { products: [] };
     cartManager.addCart(cart);
     res.status(201).json(cart);
 });
