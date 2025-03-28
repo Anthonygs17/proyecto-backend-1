@@ -7,6 +7,7 @@
             <th>Codigo</th>
             <th>Precio</th>
             <th>Stock</th>
+            <th>Categoria</th>
         </tr>
     </thead>
     <tbody>
@@ -17,7 +18,18 @@
             <td>{{this.code}}</td>
             <td>{{this.price}}</td>
             <td>{{this.stock}}</td>
+            <td>{{this.category}}</td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+
+<div style="margin-top: 1rem;">
+    {{#if hasPrevPage}}
+        <a href="/products?page={{prevPage}}&limit={{limit}}{{#if query}}&query={{query}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}">Anterior</a>
+    {{/if}}
+    Página {{page}} de {{totalPages}}
+    {{#if hasNextPage}}
+        <a href="/products?page={{nextPage}}&limit={{limit}}{{#if query}}&query={{query}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}">Siguiente</a>
+    {{/if}}
+</div>

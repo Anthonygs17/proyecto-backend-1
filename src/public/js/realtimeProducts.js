@@ -9,6 +9,7 @@ socket.on('productos', (data) => {
                 <td>${producto.code}</td>
                 <td>$${producto.price}</td>
                 <td>${producto.stock}</td>
+                <td>${producto.category}</td>
             </tr>
         `);
     }).join('');
@@ -22,7 +23,9 @@ document.getElementById('newProductForm').addEventListener('submit', (event) => 
     const code = document.getElementById('code').value;
     const price = document.getElementById('price').value;
     const stock = document.getElementById('stock').value;
-    socket.emit('newProduct', { title, description, code, price, stock });
+    const category = document.getElementById('category').value;
+    const status = true;
+    socket.emit('newProduct', { title, description, code, price, status, stock, category });
     document.getElementById('newProductForm').reset();
 });
 
