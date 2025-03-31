@@ -119,4 +119,5 @@ class CartManager {
     }
 }
 
-export { CartManager };
+const cartManager = new CartManager();
+export default cartManager;

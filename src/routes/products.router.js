@@ -1,8 +1,7 @@
 import { Router } from 'express';
-import { ProductManager } from '../managers/productManager.js';
+import productManager from '../managers/productManager.js';
 
 const router = Router();
-const productManager = new ProductManager();
 
 router.get('/', async (req, res) => {
     try{
@@ -61,12 +60,13 @@ router.put('/:pid', async (req, res) => {
     const id = req.params.pid;
     const updatedProduct = req.body;
     try{
-        const product = await productManager.updateProduct(id, updatedProduct);
+        const product = await productManager.getProductById(id);
         if(product === null){
             res.status(404).json({ msg: 'Producto no encontrado' });
             return;
         }
-        res.json(product);
+        const updated = await productManager.updateProduct(id, updatedProduct);
+        res.json(updated);
     }catch(err){
         res.status(500).json({ msg: 'Error al actualizar el producto' });
     }
@@ -75,11 +75,12 @@ router.put('/:pid', async (req, res) => {
 router.delete('/:pid', async (req, res) => {
     const id = req.params.pid;
     try{
-        const deletedProduct = await productManager.deleteProduct(id);
-        if(deletedProduct === null){
+        const product = await productManager.getProductById(id);
+        if(product === null){
             res.status(404).json({ msg: 'Producto no encontrado' });
             return;
         }
+        await productManager.deleteProduct(id);
         res.status(200).json({ msg: 'Producto eliminado' });
     }catch(err){
         res.status(500).json({ msg: 'Error al eliminar el producto' });
@@ -87,4 +88,3 @@ router.delete('/:pid', async (req, res) => {
 });
 
 export default router;
-export { productManager };

@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { CartManager } from '../managers/cartManager.js';
+import cartManager from '../managers/cartManager.js';
+import productManager from '../managers/productManager.js';
 
 const router = Router();
-const cartManager = new CartManager();
 
 router.get('/', async (req, res) => {
     try{
@@ -46,6 +46,11 @@ router.post('/:cid/product/:pid', async (req, res) => {
             res.status(404).json({ msg: 'Carrito no encontrado' });
             return;
         }
+        const product = await productManager.getProductById(productId);
+        if(product === null){
+            res.status(404).json({ msg: 'Producto no encontrado' });
+            return;
+        }
         await cartManager.addProductToCart(cartId, productId);
         res.status(201).json( { msg: 'Producto agregado al carrito' });
     }catch(err){
@@ -79,6 +84,11 @@ router.put('/:cid/products/:pid', async (req, res) => {
             res.status(404).json({ msg: 'Carrito no encontrado' });
             return;
         }
+        const product = await productManager.getProductById(productId);
+        if(product === null){
+            res.status(404).json({ msg: 'Producto no encontrado' });
+            return;
+        }
         const updatedCart = await cartManager.updateProductQuantity(cartId, productId, quantity);
         res.json(updatedCart);
     }catch(err){
@@ -108,6 +118,11 @@ router.delete('/:cid/products/:pid', async (req, res) => {
         const cart = await cartManager.getCartById(cartId);
         if(cart === null){
             res.status(404).json({ msg: 'Carrito no encontrado' });
+            return;
+        }
+        const product = await productManager.getProductById(productId);
+        if(product === null){
+            res.status(404).json({ msg: 'Producto no encontrado' });
             return;
         }
         const updatedCart = await cartManager.removeProductFromCart(cartId, productId);
